@@ -23,8 +23,7 @@ footer {
     background-color: rgb(0, 0, 0) !important;
     position: relative;
     background: url(../images/logo.png);
-    width: 170px;
-    left: 15px;
+    width: 100%;
     background-size: contain;
 }
     /* background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%) !important; */
