@@ -61,23 +61,27 @@ def predictImage(request):
         return render(request,'scaneye/predicteyescan.html',context) 
     except FileExistsError:
         context={'a':1}
-        messages.success(request,f"This file already exists in your database")
+        messages.warning(request,f"This file already exists in your database")
         return render(request,'scaneye/scaneyeindex.html',context)
 
     except:
         context={'a':1}
         os.remove(destination)
-        messages.success(request,f"Please upload a file of valid format(such as .jpg,.png,etc)")
+        messages.warning(request,f"Please upload a file of valid format(such as .jpg,.png,etc)")
         return render(request,'scaneye/scaneyeindex.html',context)
 
 def viewDataBase(request):
     import os
     username = request.user.username
-    username = request.user.username
-    listOfImages=os.listdir('./media/'+username+'/databaseeye')
-    if len(listOfImages):        
-        listOfImagesPath=['./media/'+username+'/databaseeye/'+ i for i in listOfImages]
-        context={'listOfImagesPath':listOfImagesPath}
-        return render(request,'scaneye/viewDBeye.html',context)
-    else:
-        return render(request,'dbempty.html')
+    try:    
+        listOfImages=os.listdir('./media/'+username+'/databaseeye')  
+        print("length",len(listOfImages))
+        if len(listOfImages):  
+            listOfImagesPath=['./media/'+username+'/databaseeye/'+ i for i in listOfImages]            
+            context={'listOfImagesPath':listOfImagesPath}
+            return render(request,'scaneye/viewDBeye.html',context)
+        else:
+            return render(request,'database/dbempty.html')
+    except:
+        print("dbempty")
+        return render(request,'database/dbempty.html')

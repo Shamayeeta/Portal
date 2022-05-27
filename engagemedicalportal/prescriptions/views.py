@@ -24,22 +24,6 @@ def prescriptions(request):
     context = {"prescriptions" : prescriptions, "form" : form}
     return render(request, 'prescriptions/prescriptions.html', context)
 
-# def mailprescription(request):
-#     if request.method == "POST":
-#         form = Prescriptionsform(request.POST)
-#         if form.is_valid():
-#             user=request.user
-#             patient=request.POST['patient']
-#             description=request.POST['description']
-#             email=request.POST['email']
-#             send_mail('Prescription', description,['testdjangoportal@gmail.com'],email, )
-#         messages.success(request,f"Prescription mailed successfully")
-#     else:
-#         form = Prescriptionsform()
-#     prescriptions = Prescriptions.objects.filter(user = request.user)
-#     context = {"prescriptions" : prescriptions, "form" : form}
-#     return render(request, 'prescriptions.html', context)
-
 def delete_prescription(request,pk=None):
     Prescriptions.objects.get(id=pk).delete()
     messages.success(request,f"Prescription deleted successfully")

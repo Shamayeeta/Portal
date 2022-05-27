@@ -76,12 +76,16 @@ def predictImage(request):
 def viewDataBase(request):
     import os
     username = request.user.username
-    listOfImages=os.listdir('./media/'+username+'/databasexray')
-    if len(listOfImages):        
-        listOfImagesPath=['./media/'+username+'/databasexray/'+ i for i in listOfImages]
-        
-        context={'listOfImagesPath':listOfImagesPath}
-        return render(request,'scanxray/viewDBxray.html',context)
-    else:
-        return render(request,'dbempty.html')
+    try:    
+        listOfImages=os.listdir('./media/'+username+'/databasexray')  
+        print("length",len(listOfImages))
+        if len(listOfImages):  
+            listOfImagesPath=['./media/'+username+'/databasexray/'+ i for i in listOfImages]            
+            context={'listOfImagesPath':listOfImagesPath}
+            return render(request,'scanxray/viewDBxray.html',context)
+        else:
+            return render(request,'database/dbempty.html')
+    except:
+        print("dbempty")
+        return render(request,'database/dbempty.html')
      

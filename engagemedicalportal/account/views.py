@@ -23,7 +23,7 @@ def register(request):
             msg = 'form is not valid'
     else:
         form = SignUpForm()
-    return render(request,'register.html', {'form': form, 'msg': msg})
+    return render(request,'account/register.html', {'form': form, 'msg': msg})
 
 
 def login_view(request):
@@ -34,14 +34,12 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             face_image = prepare_image(form.cleaned_data['image'])
-            # print(username,password)
-            # user = authenticate(username=username,password=password)
-            # print("face_image",face_image)
-            # img = Image.open(face_image)
-            # img.show()
             face_id = FaceIdAuthBackend()
-            user = face_id.authenticate(username=username, password=password,face_id=face_image)
-            # print(user)
+            user = face_id.authenticate(
+                username=username, 
+                password=password,
+                face_id=face_image
+                )
             if user is not None:
                 login(request, user)
                 return redirect('home')
@@ -49,20 +47,10 @@ def login_view(request):
                 msg= 'Invalid credentials'
         else:
             msg = 'error validating form'
-    return render(request, 'login.html', {'form': form, 'msg': msg})
+    return render(request, 'account/login.html', {'form': form, 'msg': msg})
 
 def home(request):
-    if request.user.is_doctor:
-        return render(request,'doctor.html')
-    elif request.user.is_patient:
-        return render(request,'patient.html')
-
-def doctor(request):
-    return render(request,'doctor.html')
-
-
-def patient(request):
-    return render(request,'patient.html')
+    return render(request,'account/home.html')
 
 def viewdb(request):
     return render(request,'viewdb.html')
