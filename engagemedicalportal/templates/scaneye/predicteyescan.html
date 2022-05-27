@@ -3,61 +3,35 @@
 {% block content%}
 <div class="text-center">
     <h2 style="font-size:25px;"> Upload Image for Classification</h2><br>
-    <div class="text-center"><h2 style="font-size:18px;">Our model identifies the image uploaded as one of the following classes: Age-Related Macular Degradation, Cataract, Glaucoma, Pathological Myopia and Normal </h2></div>
-
-</div><br>
- 
-    <br>
-   
-    <form method="post" enctype="multipart/form-data" action="predictImage">
-  
- {% csrf_token %}
- <div class="container-fluid" style="display: flex;
- flex-direction: row;
- justify-content: center;
- align-content: center;
- align-items: center;">
-  <input name="filePath" type="file"><br><br>
- </div>
- <br>
-
- 
- <div class="text-center"><input class="btn btn-primary btn-lg" type="submit" value="Submit"></div>
-<br><br>
- <div class="text-center"><h1 style="font-size:20px;">Our Ocular Disease Detection model classifies the image as :</h1><br><h2> {{predictedLabel}}</h2></div>
+    <div class="text-center"><h2 style="font-size:18px;">Our model identifies the image uploaded as one of the following classes:
+       Age-Related Macular Degradation, Cataract, Glaucoma, Pathological Myopia and Normal </h2>
+    </div>
+</div>
 <br>
- <img src="{{imgsrc}}" style = "display:block; margin-left:auto;margin-right:auto;width:300px;">
+<br>
+   
+<form method="post" enctype="multipart/form-data" action="predictImage">
+  
+   {% csrf_token %}
+   <div class = "container-fluid" 
+       style = 
+         "display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-content: center;
+         align-items: center;">
+   <input name="filePath" type="file">
+   <br><br><br>
+   </div>
+ 
+   <div class="text-center"><input class="btn btn-primary btn-lg" type="submit" value="Submit"></div>
+   <br><br>
+   <div class="text-center"><h1 style="font-size:20px;">Our Ocular Disease Detection model classifies the image as :</h1><br><h2> {{predictedLabel}}</h2></div>
+   <br>
+   <img src="{{imgsrc}}" style = "display:block; margin-left:auto;margin-right:auto;width:300px;">
 
 </form>
 <br>
 
-
 {% endblock %}
     
-    {% comment %} <br>
- <form method="post" enctype="multipart/form-data" action="predictImage">
-  
- {% csrf_token %}
- <div class="col-md-4 col-sm-4"><label for="fname">Upload Image File Here:</label> </div> <input name="filePath" type="file"><br><br> 
- <br>
- <div class="text-center">
-    <input class="btn btn-primary" type="submit" value="Submit"> {% endcomment %}
-    {% comment %} </div> {% endcomment %}
- {% comment %} <input type="submit"  value="Submit" class="btn btn-pill text-white btn-block btn-primary"> {% endcomment %}
- {% comment %} <input type="submit" value="Submit" > {% endcomment %}
-{% comment %} </div> {% endcomment %}
-{% comment %} <br><br>
-<div class="text-center">
- <h2>The classification of the image is {{predictedLabel}}</h2>
- <div class="text-center"><h2 class="my-4">Image Uploaded</h2></div>
-  <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
-      <div class="card h-100 p-4">
-        <img src="{{ filePathName }}" class="card-img-top">
-      </div>
-    </div>
-  </div>
-</div> {% endcomment %}
- {% comment %} <img src={{filePathName}} alt='imagename'>
- {{filePathName}}
-</div> {% endcomment %}

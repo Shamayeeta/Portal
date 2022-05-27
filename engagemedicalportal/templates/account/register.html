@@ -17,8 +17,12 @@
     <!-- Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
-
-
+    <style>
+      video {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+      }      
+    </style>
     <title>Multiple user login</title>
   </head>
   <body>
@@ -29,16 +33,11 @@
           <div class="row justify-content-center">
             <div class="col-md-12">
               <div class="form-block">
-                  <div <div class="text-center">
+                <div <div class="text-center">
                   <h2 style="font-size:20px;">User Registration page</h2>
                 </div>
                   <span class="mb-0 text-muted">
-                {% comment %} {% if msg %}
-                    {{ msg | safe }}
-                {% else %}
-                    Login page
-                {% endif %} {% endcomment %}
-              </span>
+                  </span>
                 <form   id='face-register-form' method="post">
                     {% csrf_token %}
                   <div class="form-group first">
@@ -69,22 +68,22 @@
                       <div class="control__indicator"></div>
                     </label>
                   </div>
-                  {% comment %} <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio> {% endcomment %}
+              
                   <span class="text-error">{{ form.errors }}</span>
                   <input id="video-button" type="button" value="Start Webcam" class="align-self-end btn btn-pill text-white btn-block btn-primary">
                   <video id="screenshot-video" width="100%" height="100%" autoplay></video>
                   <input id="register-button" type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
-                      {{form.image}}
-                </form>
-                
+                        {{form.image}}
+
+                </form>                
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
+  
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

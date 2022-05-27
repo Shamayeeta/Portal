@@ -16,23 +16,23 @@
 
     <!-- Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
-
-
+    <style>
+      video {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+      }      
+    </style>
     <title>Medical Portal</title>
   </head>
   <body>
   <div class="content">
     <div class="container">
       <div class="row justify-content-center">
-        <!-- <div class="col-md-6 order-md-2">
-          <img src="images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
-        </div> -->
         <div class="col-md-6 contents">
           <div class="row justify-content-center">
             <div class="col-md-12">
               <div class="form-block">
-                  <div class="mb-4">
+                <div class="mb-4">
                 </div>
 
               <span class="mb-0 text-muted">
@@ -58,14 +58,12 @@
                   <video id="screenshot-video" width="100%" height="100%" autoplay></video>
                   <input id="login-button" type="submit"  value="Log In" class="btn btn-pill text-white btn-block btn-primary">
                     {{form.image}}
-              </form>           
-              
+                    
+              </form>         
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   </div>
