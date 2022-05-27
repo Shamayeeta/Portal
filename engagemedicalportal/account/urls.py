@@ -8,5 +8,6 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('login/', views.login_view, name='login_view'),
     path('register/', views.register, name='register'),
-    path('viewdatabase/',views.viewdb,name='viewdatabase')
+    path('viewdatabase/',views.viewdb,name='viewdatabase'),
+    path('logout/', views.Logout, name='logout'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

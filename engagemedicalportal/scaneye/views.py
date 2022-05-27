@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import tensorflow as tf
-from keras.models import load_model
 from django.contrib import messages
 import json
 from tensorflow import Graph
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -18,10 +19,12 @@ labelInfo = json.loads(x)
 
 model_graph = Graph()
 
+@login_required(login_url='/')
 def scaneye(request):
     context={'a':1}
     return render(request,'scaneye/scaneyeindex.html',context)
 
+@login_required(login_url='/')
 def predictImage(request):
     import os
     import numpy as np
@@ -70,6 +73,7 @@ def predictImage(request):
         messages.warning(request,f"Please upload a file of valid format(such as .jpg,.png,etc)")
         return render(request,'scaneye/scaneyeindex.html',context)
 
+@login_required(login_url='/')
 def viewDataBase(request):
     import os
     username = request.user.username

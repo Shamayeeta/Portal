@@ -5,6 +5,8 @@ import tensorflow as tf
 from django.contrib import messages
 import json
 from tensorflow import Graph
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -18,10 +20,12 @@ labelInfo = json.loads(x)
 
 model_graph = Graph()
 
+@login_required(login_url='/')
 def scanxray(request):
     context={'a':1}
     return render(request,'scanxray/scanxrayindex.html',context)
 
+@login_required(login_url='/')
 def predictImage(request):
     import os
     import numpy as np
@@ -72,7 +76,7 @@ def predictImage(request):
         messages.success(request,f"Please upload a file of valid format(such as .jpg,.png,etc")
         return render(request,'scanxray/scanxrayindex.html',context)
 
-
+@login_required(login_url='/')
 def viewDataBase(request):
     import os
     username = request.user.username

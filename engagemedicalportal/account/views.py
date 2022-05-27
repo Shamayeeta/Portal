@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from .authenticate import FaceIdAuthBackend
 from .utils import prepare_image
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -49,8 +50,15 @@ def login_view(request):
             msg = 'error validating form'
     return render(request, 'account/login.html', {'form': form, 'msg': msg})
 
+@login_required(login_url='/')
 def home(request):
     return render(request,'account/home.html')
 
+@login_required(login_url='/')
 def viewdb(request):
-    return render(request,'viewdb.html')
+    return render(request,'database/viewdb.html')
+
+@login_required(login_url='/')
+def Logout(request):
+    logout(request)
+    return render(request, 'index.html')

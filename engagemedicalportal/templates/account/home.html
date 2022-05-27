@@ -6,7 +6,7 @@
   <h3>Welcome {{user.username}}</h3>
 
   <hr> <br>
-  <div class="row">
+  <div class="row justify-content-center">
     {% if user.is_patient %}
     <div class="col-md-4">
       <a href="{% url 'viewdatabase' %}">
@@ -24,19 +24,20 @@
     {% endif %}
 
     {% if user.is_doctor %}
-    <div class="col-md-4">
-      <a href="{% url 'viewdatabase' %}">
-        <div class="card">
-          <img class="card-img-top" src="{% static 'images/viewdatabase.png' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Prescriptions
-            </h5>
-            Create prescriptions for patients
+    <div class="row">
+      <div class="col-md-4">
+        <a href="{% url 'prescriptions' %}">
+          <div class="card">
+            <img class="card-img-top" src="{% static 'images/prescription.webp' %}" alt="Notes image">
+            <div class="card-body">
+              <h5 class="card-title ">
+                Prescriptions
+              </h5>
+              Create and mail prescriptions for patients
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
+        </a>
+      </div>
     {% endif %}
 
     <div class="col-md-4">
@@ -60,7 +61,7 @@
             <h5 class="card-title ">
               Scan XRay
             </h5>
-            Scan Images for Lung Disease Detection
+            Scan Images for Lung Disease Detection      
           </div>
         </div>
       </a>
