@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content%}
+
+<div class="text-center"><h2 style="font-size:25px;">Upload Image for Classification</h2></div><br>
+<div class="text-center"><h2 style="font-size:18px;">Our model identifies the image uploaded as one of the following classes: Bacterial Pneumonia, COVID, Normal, Tubercolosis and Viral Pneumonia </h2></div>
+    
+    <br>
+   
+    <form method="post" enctype="multipart/form-data" action="predictImage">
+  
+ {% csrf_token %}
+ <div class="container-fluid" style="display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-content: center;
+ align-items: center;">
+  <input name="filePath" type="file">
+ </div>
+ </div>
+<br><br>
+
+ <div class="text-center">
+ <input class="btn btn-primary btn-lg" type="submit" value="Submit" style = "text-align-last:center;"></div>
+</form>
+<br>
+
+
+{% endblock %}
+{% comment %} {% load crispy_forms_tags %}  
+
+<div class="container">
+
+    <!--Django Form-->
+    <div class="text-center"><h2 class="my-4">Upload a Scan</h2></div>
+    <form class ="justify-content-center" method="post" enctype="multipart/form-data" action="predictImage">
+        {% csrf_token %}
+        <div class="col-md-4 col-sm-4"><label for="fname">Upload Image File Here:</label> </div> <input name="filePath" type="file"><br><br>
+        <br>
+        <button class="btn btn-dark my-4" type="submit">Submit</button>
+    </form>
+
+  <!--Django Model-->
+  
+
+
+{% endblock %}
+
+{% comment %} <div class="container">
+
+          <!--Simple Form-->
+          <h2 class="my-4">Upload Image for Classification</h2>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <input type="file" name="upload" accept="image/*">
+                <br>
+                <button class="btn btn-dark my-4" type="submit">Submit</button>
+          </form>
+
+          <!--See Image Uploaded-->
+          <h2 class="my-4">Eye Scan</h2>
+          <div class="row">
+            {% if filePathName %}
+            <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
+              <img src="{{ filePathName }}" class="img-fluid">
+              <br>
+              <div class="text-center">
+                <input class="btn btn-primary" type="submit" value="Submit">
+              </div>
+            {% else %}
+            <p>No scans uploaded.</p>
+            {% endif %}
+          </div>
+
+        </div>
+    
+
+{% endblock %} {% endcomment %}
+{% comment %} <div class="text-center">
+    <h2>Upload Image for Classification</h2>
+</div><br>
+
+<form class ="justify-content-center" method="post" enctype="multipart/form-data" action="predictImage">
+  
+ {% csrf_token %}
+ <div class="col-md-4 col-sm-4"><label for="fname">Upload Image File Here:</label> </div> <input name="filePath" type="file"><br><br>
+ <br>
+ <div class="text-center">
+ <input class="btn btn-primary" type="submit" value="Submit">
+ </div>
+ {% comment %} <input type="submit"  value="Submit" class="btn btn-pill text-white btn-block btn-primary"> {% endcomment %}
+ {% comment %} <input type="submit" value="Submit" > {% endcomment %}
+{% comment %} </div>
+</form>
+<br> {% endcomment %}

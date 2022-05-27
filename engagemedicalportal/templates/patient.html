@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<section class="container text-center">
+  <h3>Welcome {{user.username}}</h3>
+
+  <hr> <br>
+  <div class="row">
+    <div class="col-md-4">
+      <a href="{% url 'viewdatabase' %}">
+        <div class="card">
+          <img class="card-img-top" src="{% static 'images/viewdatabase.png' %}" alt="Notes image">
+          <div class="card-body">
+            <h5 class="card-title ">
+              View Database
+            </h5>
+            View previously uploaded Scans
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a href="{% url 'scaneye' %}">
+        <div class="card">
+          <img class="card-img-top" src="{% static 'images/scaneye.png' %}" alt="Scaneye image">
+          <div class="card-body">
+            <h5 class="card-title ">
+              Scan Eye
+            </h5>
+            Scan Images for Ocular Disease Detection
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="{% url 'scanxray' %}">
+        <div class="card">
+          <img class="card-img-top" src="{% static 'images/scanxray.jpg' %}" alt="Notes image">
+          <div class="card-body">
+            <h5 class="card-title ">
+              Scan XRay
+            </h5>
+            Scan Images for Lung Disease Detection
+          </div>
+        </div>
+      </a>
+    </div>
+    
+
+</section>
+{% endblock content %}

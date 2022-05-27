@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<section class="container text-center">
+  <h3>Welcome {{user.username}}</h3>
+
+  <hr> <br>
+  <div class="row justify-content-center" >
+    <div class="col-md-4">
+      <a href="{% url 'viewDataBaseeye' %}">
+        <div class="card">
+          <img class="card-img-top" src="{% static 'images/vieweyedb.png' %}" alt="Notes image">
+          <div class="card-body">
+            <h5 class="card-title ">
+              Eye Scans
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a href="{% url 'viewDataBasexray' %}">
+        <div class="card">
+          <img class="card-img-top"  src="{% static 'images/viewxraydb.png' %}" alt="Notes image">
+          <div class="card-body">
+            <h5 class="card-title ">
+              XRay Scans
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+
+</section>
+{% endblock content %}
