@@ -73,6 +73,7 @@ def predictImage(request):
 
     except :
         context={'a':1}
+        os.remove(destination)
         messages.success(request,f"Please upload a file of valid format(such as .jpg,.png,etc")
         return render(request,'scanxray/scanxrayindex.html',context)
 
