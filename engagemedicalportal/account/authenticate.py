@@ -3,6 +3,14 @@ from django.contrib.auth.hashers import check_password
 import face_recognition
 from .models import *
 
+class face_exists(ModelBackend):
+    def check_face_exists(self,face_id = None, **kwargs):
+        known_image= face_recognition.load_image_file(face_id)
+        face_locations = face_recognition.face_locations(known_image,model="cnn")
+        if len(face_locations):
+            return True
+        return False
+
 class FaceIdAuthBackend(ModelBackend):
     def authenticate(self, username=None, password=None, face_id=None, **kwargs):
         try:

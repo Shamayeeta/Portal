@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import login,logout
-from .authenticate import FaceIdAuthBackend
+from .authenticate import FaceIdAuthBackend,face_exists
 from .utils import prepare_image
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -16,15 +17,20 @@ def register(request):
     msg = None
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
+        face_id = face_exists()
         if form.is_valid():
-            user = form.save()
-            msg = 'user created'
-            return redirect('login_view')
+            face_image = prepare_image(form.cleaned_data['image'])
+            if face_id.check_face_exists(face_id=face_image):
+                user = form.save()                    
+                messages.success(request,f"User Created Succesfully.")
+                return redirect('login_view')
+            else:
+                messages.success(request,f"No face detected. Please register again.")
         else:
-            msg = 'form is not valid'
+            messages.success(request,f"Form is not valid.")
     else:
         form = SignUpForm()
-    return render(request,'account/register.html', {'form': form, 'msg': msg})
+    return render(request,'account/register.html', {'form': form})
 
 
 def login_view(request):
@@ -45,10 +51,10 @@ def login_view(request):
                 login(request, user)
                 return redirect('home')
             else:
-                msg= 'Invalid credentials'
+                messages.success(request,f"Invalid Credentials.")
         else:
-            msg = 'error validating form'
-    return render(request, 'account/login.html', {'form': form, 'msg': msg})
+            messages.success(request,f"Error Validating Form.")
+    return render(request, 'account/login.html', {'form': form})
 
 @login_required(login_url='/')
 def home(request):
