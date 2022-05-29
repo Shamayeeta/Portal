@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content%}
+
+{% for i in listOfImagesPath %}
+
+<style>
+    img{
+        padding:10px;
+        align-item:center;
+    }
+</style>
+<div class = "container-fluid" style = "display:flex;justify-content:center">
+    <img src={{i}} style="width: 300px;"> <br>
+</div>
+<div class = "container-fluid" style = "display:flex;justify-content:center">
+    {{i}} 
+</div><br>
+
+{% endfor%}
+
+{% endblock %}
