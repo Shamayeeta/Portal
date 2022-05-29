@@ -21,12 +21,12 @@ def register(request):
             face_image = prepare_image(form.cleaned_data['image'])
             if face_id.check_face_exists(face_id=face_image):
                 user = form.save()                    
-                messages.success(request,f"User Created Succesfully.")
+                # messages.success(request,f"User Created Succesfully.")
                 return redirect('login_view')
-            else:
-                messages.success(request,f"No face detected. Please register again.")
-        else:
-            messages.success(request,f"Form is not valid.")
+        #     else:
+        #         messages.success(request,f"No face detected. Please register again.")
+        # else:
+        #     messages.success(request,f"Form is not valid.")
     else:
         form = SignUpForm()
     return render(request,'account/register.html', {'form': form})
@@ -49,10 +49,10 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 return redirect('home')
-            else:
-                messages.success(request,f"Invalid Credentials.")
-        else:
-            messages.success(request,f"Error Validating Form.")
+        #     else:
+        #         messages.success(request,f"Invalid Credentials.")
+        # else:
+        #     messages.success(request,f"Error Validating Form.")
     return render(request, 'account/login.html', {'form': form})
 
 @login_required(login_url='/')
