@@ -38,5 +38,5 @@ The web-app should now be accessible at <a href="127.0.0.1:8000">127.0.0.1:8000<
 <b>Example Dataset :</b><br>
 A dataset containing 5 images of each class has been uploaded to this link for testing purposes : 
 <a href="https://iitk-my.sharepoint.com/:f:/g/personal/shamayeeta20_iitk_ac_in/EmDCemNDsxxLpDUGfkrhUmQBj1I3fPioumAG8m6PFVmQFQ?e=oLPbM0">https://iitk-my.sharepoint.com/:f:/g/personal/shamayeeta20_iitk_ac_in/EmDCemNDsxxLpDUGfkrhUmQBj1I3fPioumAG8m6PFVmQFQ?e=oLPbM0</a>
-
+<br>
 In order to avoid confusion, the Eye scans have their label appended at the end, and the XRay scans have been named according to their labels.
