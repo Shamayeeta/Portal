@@ -1,20 +1,19 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import login,logout
-from .authenticate import FaceIdAuthBackend,face_exists
+from .authenticate import check_user,face_exists
 from .utils import prepare_image
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # Create your views here.
 
-
+#returns main page for login or register
 def index(request):
     return render(request, 'index.html')
 
 
 def register(request):
-    msg = None
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
         face_id = face_exists()
@@ -41,7 +40,7 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             face_image = prepare_image(form.cleaned_data['image'])
-            face_id = FaceIdAuthBackend()
+            face_id = check_user()
             user = face_id.authenticate(
                 username=username, 
                 password=password,
@@ -60,6 +59,7 @@ def login_view(request):
 def home(request):
     return render(request,'account/home.html')
 
+#returns view database page for patients
 @login_required(login_url='/')
 def viewdb(request):
     return render(request,'database/viewdb.html')

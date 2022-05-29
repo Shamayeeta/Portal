@@ -3,6 +3,7 @@ from django.contrib.auth.hashers import check_password
 import face_recognition
 from .models import *
 
+#checks whether face exists in the image captured during registration
 class face_exists(ModelBackend):
     def check_face_exists(self,face_id = None, **kwargs):
         known_image= face_recognition.load_image_file(face_id)
@@ -11,7 +12,9 @@ class face_exists(ModelBackend):
             return True
         return False
 
-class FaceIdAuthBackend(ModelBackend):
+#checks whether the user is authenticated
+class check_user(ModelBackend):
+    #verifies the password and the user face image
     def authenticate(self, username=None, password=None, face_id=None, **kwargs):
         try:
             user = User.objects.get(username=username)
@@ -20,10 +23,9 @@ class FaceIdAuthBackend(ModelBackend):
                     return user                                                                                   
                                                                                     
         except User.DoesNotExist:
-            # Run the default password hasher once to reduce the timing
-            # difference between an existing and a non-existing user (#20760).
             User().set_password(password)
 
+    #verifies whether the user's face matches with the face captured during registration
     def check_face_id(self, face_id=None, uploaded_face_id=None):
         known_image= face_recognition.load_image_file(face_id)
         unknown_image = face_recognition.load_image_file(uploaded_face_id)

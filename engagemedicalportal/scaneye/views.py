@@ -5,17 +5,15 @@ from django.contrib import messages
 import json
 from tensorflow import Graph
 from django.contrib.auth.decorators import login_required
+import os
+import numpy as np
 
 # Create your views here.
 
-
 img_height, img_width=250,250
-
   
-# JSON string:
-# Multi-line string
-x = r"""{"0" : "Age-Related Macular Degeneration", "1" : "Cataract", "2" : "Glaucoma", "3" : "Pathological Myopia", "4" : "Normal"}"""
-labelInfo = json.loads(x)
+# list of classes
+labelInfo = {"0" : "Age-Related Macular Degeneration", "1" : "Cataract", "2" : "Glaucoma", "3" : "Pathological Myopia", "4" : "Normal"}
 
 model_graph = Graph()
 
@@ -26,8 +24,6 @@ def scaneye(request):
 
 @login_required(login_url='/')
 def predictImage(request):
-    import os
-    import numpy as np
     fileObj=request.FILES['filePath']
     try:
         fs=FileSystemStorage()
@@ -38,7 +34,8 @@ def predictImage(request):
         destination = os.path.join(cwd,'media',request.user.username,'databaseeye',filePathName)
         imgsrc = './media/'+request.user.username+'/databaseeye/'+filePathName
         os.renames(source,destination)
-
+        
+        #loads and processes image
         with model_graph.as_default():
             tf_session = tf.compat.v1.Session()
             with tf_session.as_default():
@@ -46,14 +43,19 @@ def predictImage(request):
                 img_array = tf.keras.preprocessing.image.img_to_array(img)
                 img_array = tf.expand_dims(img_array, 0) 
                 model = tf.keras.models.load_model("./models/eyescan.h5")
+                #predicts the probability of the image being in different classes
                 predi=model.predict(img_array,steps=1)
 
-        predictedlabel = ""
         predictedLabel=labelInfo[str(np.argmax(predi[0]))]
-        if len(predictedLabel.split())>1:
-            for i in predictedLabel.split():
-                predictedlabel+=i
+        predictedlabel=predictedLabel
 
+        #ensures that there are no spaces in the predicted label which is appended to the file name
+        if len(predictedLabel.split())>1:
+            predictedlabel = ""
+            for i in predictedLabel.split():
+                predictedlabel+=i          
+
+        #renames the file to include the predicted label and saves it 
         destination1 = destination.split('.')[0]
         destination2 = destination.split('.')[-1]
         finalimgpath = destination1 + '-' +predictedlabel +'.'+destination2
@@ -61,7 +63,8 @@ def predictImage(request):
         imgsrc = './media/'+request.user.username+'/databaseeye/'+filePathName.split('.')[0] +'-' +predictedlabel +'.'+destination2
 
         context={'filePathName1':filePathName1,'predictedLabel':predictedLabel, 'imgsrc':imgsrc}
-        return render(request,'scaneye/predicteyescan.html',context) 
+        return render(request,'scaneye/predicteyescan.html',context)
+         
     except FileExistsError:
         context={'a':1}
         messages.warning(request,f"This file already exists in your database")
@@ -75,11 +78,9 @@ def predictImage(request):
 
 @login_required(login_url='/')
 def viewDataBase(request):
-    import os
     username = request.user.username
     try:    
         listOfImages=os.listdir('./media/'+username+'/databaseeye')  
-        print("length",len(listOfImages))
         if len(listOfImages):  
             listOfImagesPath=['./media/'+username+'/databaseeye/'+ i for i in listOfImages]            
             context={'listOfImagesPath':listOfImagesPath}
@@ -87,5 +88,4 @@ def viewDataBase(request):
         else:
             return render(request,'database/dbempty.html')
     except:
-        print("dbempty")
         return render(request,'database/dbempty.html')

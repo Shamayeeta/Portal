@@ -9,11 +9,17 @@
         <div class="col-md-3" padding=10px>
             <a href="{% url 'prescriptiondetail' prescription.id %}">
                 <div class="card">
-                    <div class="card-header">{{prescription.patient}}</div>
-                    <div class="card-body">{{prescription.description|slice:"0:100"}}</div>
-                    <div class="card-footer mt-auto "><a href="{% url 'delete_prescription' prescription.id %}">
-                        <i class="fa fa-trash fa-2x" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                        </i></a>
+                    <div class="card-header">
+                        {{prescription.patient}}
+                    </div>
+                    <div class="card-body">
+                        {{prescription.description|slice:"0:100"}}
+                    </div>
+                    <div class="card-footer mt-auto ">
+                        <a href="{% url 'delete_prescription' prescription.id %}">
+                            <i class="fa fa-trash fa-2x" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                            </i>
+                        </a>
                         <a href="{% url 'duplicateprescription' prescription.id %}">
                             <i class="fa fa-clipboard fa-2x" data-toggle="tooltip" data-placement="bottom" title="Duplicate">
                             </i>

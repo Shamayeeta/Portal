@@ -3,8 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import UserFaceImage,User
 from .utils import base64_file
 from django.contrib.auth import get_user_model
-
-User = get_user_model()
+User = get_user_model()#takes the modified model of User into account
 class LoginForm(forms.Form):
     username = forms.CharField(
         widget= forms.TextInput(
@@ -52,7 +51,9 @@ class SignUpForm(UserCreationForm):
             }
         )
     )
-    image = forms.CharField(widget=forms.HiddenInput())
+    image = forms.CharField(
+        widget=forms.HiddenInput()
+    )
 
     class Meta:
         model = User
