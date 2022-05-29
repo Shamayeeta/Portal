@@ -35,7 +35,7 @@ The web-app should now be accessible at <a href="127.0.0.1:8000">127.0.0.1:8000<
  2. COVID : <a> https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database</a>
  3.  Normal :<a> https://www.kaggle.com/datasets/tawsifurrahman/tuberculosis-tb-chest-xray-dataset</a>
  <br>
-### Example Dataset
+### Example Dataset<br>
 A dataset containing 5 images of each class has been uploaded to this link for testing purposes : 
 <a>https://iitk-my.sharepoint.com/:f:/g/personal/shamayeeta20_iitk_ac_in/EmDCemNDsxxLpDUGfkrhUmQBj1I3fPioumAG8m6PFVmQFQ?e=oLPbM0</a>
 
