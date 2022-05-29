@@ -42,4 +42,4 @@ A dataset containing 5 images of each class has been uploaded to this link for t
 In order to avoid confusion, the Eye scans have their label appended at the end, and the XRay scans have been named according to their labels.
 <br><br>
 <b>Trained Models</b><br>
-The Jupyter Notebooks which contain the code I used for training the models, which detect diseases from uploaded Eye Scans and XRay Scans, have been uploaded in the <b>Model-Notebooks</b> folder of this repository.
+The Jupyter Notebooks which contain the code I used for training the models, which detect diseases from uploaded Eye Scans and XRay Scans, have been uploaded in the <b>model-notebooks</b> folder of this repository.
