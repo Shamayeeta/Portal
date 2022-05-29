@@ -42,7 +42,7 @@ def predictImage(request):
                 img = tf.keras.preprocessing.image.load_img(destination, target_size=(256, 256))
                 img_array = tf.keras.preprocessing.image.img_to_array(img)
                 img_array = tf.expand_dims(img_array, 0) 
-                model = tf.keras.models.load_model("./models/eyescan.h5")
+                model = tf.keras.models.load_model("./models/eyescanclassificationmodel.h5")
                 #predicts the probability of the image being in different classes
                 predi=model.predict(img_array,steps=1)
 
