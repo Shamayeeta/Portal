@@ -26,7 +26,7 @@ python manage.py runserver
 The web-app should now be accessible at <a href="http://127.0.0.1:8000/">127.0.0.1:8000
 ## Datasets 
  For Ocular Disease Detection, I used the following dataset from Kaggle, after categorising the various images into  different classes. 
-<b>Kaggle Dataset:</b><a> https://www.kaggle.com/datasets/andrewmvd/ocular-disease-recognition-odir5k</a>
+<b>Kaggle Dataset:</b><a href="https://www.kaggle.com/datasets/andrewmvd/ocular-disease-recognition-odir5k"> https://www.kaggle.com/datasets/andrewmvd/ocular-disease-recognition-odir5k</a>
 
 
  For Lung Disease Detection, I used the following datasets from Kaggle, after categorising the various images into  different classes. 
