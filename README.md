@@ -3,7 +3,7 @@ This medical portal web-app, that helps detect ocular and lung diseases from upl
 ## Features
 - The app incorporated TFA (Two-Factor Authentication) which requires the user to enter correct password and have their face match with the picture taken during registration.
 - The user is allowed to register as a <b>Doctor</b> or a <b>Patient</b>.
-- Upon login the user can upload Eye scans or Chest-XRay scans to be classified. <br>
+- Upon logginG in, the user can upload Eye scans or Chest-XRay scans to be classified. <br>
 #### Eye scans are diagnosed as:
  <table><tr><td>Age Related Macular Degeneration</td><td>Glaucoma</td><td>Pathological Myopia<td>Cataract</td><td>Normal</td></tr></table>
  
